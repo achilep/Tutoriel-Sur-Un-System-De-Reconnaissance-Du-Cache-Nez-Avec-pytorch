@@ -4,7 +4,7 @@ Dans ce tuto, vous apprendrez et utiliserez la technique d'apprentissage par tra
 
 resultat final
 
-<img src="https://github.com/achilep/Face-Mask-Recognition-System-Tutorial-With-Pytorch/blob/main/Resource/readme_image/test result1.png" alt="output"/>
+<img src="https://github.com/achilep/Tutoriel-Sur-Un-System-De-Reconnaissance-Du-Cache-Nez-Avec-pytorch/tree/main/Resource/readme_image/test result1.png" alt="output"/>
 
 ### Notion couvert par ce tutoriel 
 
@@ -141,10 +141,10 @@ We are using Vgg16 model in this tutorial.
 
 VGG16 is a convolutional neural network model proposed by K. Simonyan and A. Zisserman from the University of Oxford in the paper “Very Deep Convolutional Networks for Large-Scale Image Recognition”. The model achieves 92.7% top-5 test accuracy in ImageNet, which is a dataset of over 14 million images belonging to 1000 classes.
 
-<img src="https://github.com/achilep/Face-Mask-Recognition-System-Tutorial-With-Pytorch/blob/main/Resource/readme_image/vgg16-neural-network-850x501.jpg" alt="Load the Model"/>
+<img src="https://github.com/achilep/Tutoriel-Sur-Un-System-De-Reconnaissance-Du-Cache-Nez-Avec-pytorch/blob/main/Resource/readme_image/vgg16-neural-network-850x501.jpg" alt="Load the Model"/>
 
 Here is a more intuitive layout of the VGG-16 Model.
-<img src="https://github.com/achilep/Face-Mask-Recognition-System-Tutorial-With-Pytorch/blob/main/Resource/readme_image/VGG-2-850x208.png" alt="Load the Model"/>
+<img src="https://github.com/achilep/Tutoriel-Sur-Un-System-De-Reconnaissance-Du-Cache-Nez-Avec-pytorch/blob/main/Resource/readme_image/VGG-2-850x208.png" alt="Load the Model"/>
 
 The following are the layers of the model:
 
@@ -210,12 +210,12 @@ use_cuda = torch.cuda.is_available()
 if use_cuda:
     model_transfer = model_transfer.cuda()
   ```
-<img src="https://github.com/achilep/Face-Mask-Recognition-System-Tutorial-With-Pytorch/blob/main/Resource/readme_image/pretrainmodel.png" alt="Load the Model"/>
+<img src="https://github.com/achilep/Tutoriel-Sur-Un-System-De-Reconnaissance-Du-Cache-Nez-Avec-pytorch/blob/main/Resource/readme_image/pretrainmodel.png" alt="Load the Model"/>
 
 ```
 print(model_transfer)
 ```
-<img src="https://github.com/achilep/Face-Mask-Recognition-System-Tutorial-With-Pytorch/blob/main/Resource/readme_image/print-modeltrasnfert.png" alt="Load the Model"/>
+<img src="https://github.com/achilep/Tutoriel-Sur-Un-System-De-Reconnaissance-Du-Cache-Nez-Avec-pytorch/blob/main/Resource/readme_image/print-modeltrasnfert.png" alt="Load the Model"/>
 
 ### Step 3: Specify Loss Function and Optimizer
 Error and Loss Function: In most learning networks, error is calculated as the difference between the actual output and the predicted output.
@@ -311,12 +311,12 @@ model_transfer = train(n_epochs, loaders_transfer, model_transfer, optimizer_tra
 # load the model that got the best validation accuracy (uncomment the line below)
 model_transfer.load_state_dict(torch.load('model_transfer.pt'))
 ```
-<img src="https://github.com/achilep/Face-Mask-Recognition-System-Tutorial-With-Pytorch/blob/main/Resource/readme_image/train.png" alt="Load the Model"/>
+<img src="https://github.com/achilep/Tutoriel-Sur-Un-System-De-Reconnaissance-Du-Cache-Nez-Avec-pytorch/blob/main/Resource/readme_image/train.png" alt="Load the Model"/>
 
 ```
 print(model_transfer)
 ```
-<img src="https://github.com/achilep/Face-Mask-Recognition-System-Tutorial-With-Pytorch/blob/main/Resource/readme_image/after_train.png" alt="Load the Model"/>
+<img src="https://github.com/achilep/Tutoriel-Sur-Un-System-De-Reconnaissance-Du-Cache-Nez-Avec-pytorch/blob/main/Resource/readme_image/after_train.png" alt="Load the Model"/>
 
 ### Step 5: Test the Model
 Try out your model on the test dataset . Use the code cell below to calculate and print the test loss and accuracy. Ensure that your test accuracy is greater than 60%.
@@ -357,7 +357,7 @@ def test(loaders, model, criterion, use_cuda):
 ```
 test(loaders_transfer, model_transfer, criterion_transfer, use_cuda)
 ```
-<img src="https://github.com/achilep/Face-Mask-Recognition-System-Tutorial-With-Pytorch/blob/main/Resource/readme_image/test_accuraty.png" alt="Test Accuracy"/>
+<img src="https://github.com/achilep/Tutoriel-Sur-Un-System-De-Reconnaissance-Du-Cache-Nez-Avec-pytorch/blob/main/Resource/readme_image/test_accuraty.png" alt="Test Accuracy"/>
 
 ### Step 6: Predict if a human is wearing a face mask or not  with the Model
 Write a function that takes an image path as input and returns the mask if the man present on the image is wearing a face mask or not base on the prediction of the model.
@@ -424,9 +424,9 @@ We can now use how test dataset to test our system.
 for file in np.array(glob("../input/covid19-face-mask-recognition-test-data/Covid19-face-mask-recognition-test-data/*")):
     run_app(file)
 ```
-<img src="https://github.com/achilep/Face-Mask-Recognition-System-Tutorial-With-Pytorch/blob/main/Resource/readme_image/test result1.png" alt="result of the predition"/>
-<img src="https://github.com/achilep/Face-Mask-Recognition-System-Tutorial-With-Pytorch/blob/main/Resource/readme_image/test result1.png" alt="result of the predition"/>
-<img src="https://github.com/achilep/Face-Mask-Recognition-System-Tutorial-With-Pytorch/blob/main/Resource/readme_image/test result1.png" alt="result of the predition"/>
+<img src="https://github.com/achilep/Tutoriel-Sur-Un-System-De-Reconnaissance-Du-Cache-Nez-Avec-pytorch/blob/main/Resource/readme_image/test result1.png" alt="result of the predition"/>
+<img src="https://github.com/achilep/Tutoriel-Sur-Un-System-De-Reconnaissance-Du-Cache-Nez-Avec-pytorch/blob/main/Resource/readme_image/test result1.png" alt="result of the predition"/>
+<img src="https://github.com/achilep/Tutoriel-Sur-Un-System-De-Reconnaissance-Du-Cache-Nez-Avec-pytorch/blob/main/Resource/readme_image/test result1.png" alt="result of the predition"/>
 
 ### Step 9: optional integrate opencv to the project
 Write the run_app_with_opencv method that an image of a human an print ```This person is responsible, he wears his face mask!!!!``` when a that person is wearing a face 
@@ -473,7 +473,7 @@ def run_app_with_opencv(img_path):
 for file in np.array(glob("../input/covid19-face-mask-recognition-test-data/Covid19-face-mask-recognition-test-data/4.jpeg")):
     run_app_with_opencv(file)
   ```
-<img src="https://github.com/achilep/Face-Mask-Recognition-System-Tutorial-With-Pytorch/blob/main/Resource/readme_image/test result with opencv.png" alt="result of the predition"/>
+<img src="https://github.com/achilep/Tutoriel-Sur-Un-System-De-Reconnaissance-Du-Cache-Nez-Avec-pytorch/blob/main/Resource/readme_image/test result with opencv.png" alt="result of the predition"/>
 
 ## summary 
 we have learn how to use pre- train model to speed up the training of our model. 
