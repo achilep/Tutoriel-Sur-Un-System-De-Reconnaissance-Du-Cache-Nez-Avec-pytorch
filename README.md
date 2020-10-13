@@ -4,7 +4,7 @@ Dans ce tuto, vous apprendrez et utiliserez la technique d'apprentissage par tra
 
 resultat final
 
-<img src="https://github.com/achilep/Tutoriel-Sur-Un-System-De-Reconnaissance-Du-Cache-Nez-Avec-pytorch/tree/main/Resource/readme_image/test result1.png" alt="output"/>
+<img src="https://github.com/achilep/Tutoriel-Sur-Un-System-De-Reconnaissance-Du-Cache-Nez-Avec-pytorch/blob/main/Resource/readme_image/test%20result1.png" alt="output"/>
 
 ### Notion couvert par ce tutoriel 
 
