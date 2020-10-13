@@ -24,47 +24,49 @@ The models subpackage contains definitions of models for addressing different ta
 4. [optim](https://pytorch.org/docs/stable/optim.html#:~:text=optim-,torch.,easily%20integrated%20in%20the%20future.):torch.optim is a package implementing various optimization algorithms.
 
       
-### requirement 
-- Computer with GPU
-- Good knowledge of python.
-- Basic knowledge of deep learning (neural network, convolutional neural network(CNN), etc. ) 
+### prerequis
+- Un ordinateur avec GPU
+- une bonne maitrise du langage python.
+- avoir les base sur l apprentisage profond  (neural network, convolutional neural network(CNN), etc. ) 
 
-### Seting up the working environment :
-- Local computer: you can follow the instruction [here](https://pytorch.org/get-started/locally/) to set up pytorch in computer. 
+### insatlle l environement de travail  :
+- Ordinateur local: vous pouvez suivre les instruction [ci](https://pytorch.org/get-started/locally/) pour pouvoir utilise pytorch dans votre ordinateur. 
 
-- platform as as service: Kaggle Kernels is a free platform to run Jupyter notebooks in the browser. kaggle provide free GPU to train you model.
-you can Sign in [here](https://www.kaggle.com/)
+- plateforme en tant que service: Kaggle Kernels est une plateforme gratuite permettant d'exécuter des notebooks Jupyter dans le navigateur. kaggle offre le  GPU gratuitement pour pouvoir facilement entraine le model.
+vous pouvez vous enregistrez sur kaggle  [ici](https://www.kaggle.com/)
 
-## Building the App step by step  
+## Construire l application etape par etape  
 
-### Step 0: Import Datasets
-Make sure that you've downloaded the required dataset.
+### etape 0: Importe les daonne
+Assurez-vous d'avoir téléchargé l'ensemble de données requis.
 
-Download the [dataset](https://www.kaggle.com/achilep/covid19-face-mask-data/download), For testing we are using this [dataset](https://www.kaggle.com/achilep/covid19-face-mask-recognition-test-data).
+telechargez les [donne](https://www.kaggle.com/achilep/covid19-face-mask-data/download), pour tester nous allons utilise cet donne [ci](https://www.kaggle.com/achilep/covid19-face-mask-recognition-test-data).
 ### Step 1: Specify Data Loaders for the covid19-face-mask-data dataset
  
-- ```transforms.Compose``` just clubs all the transforms provided to it. So, all the transforms in the ```transforms.Compose``` are applied to the input one by one.
+- ```transforms.Compose``` clubs juste toutes les transformations qui lui sont apportées. 
+Donc, toutes les transformations dans le ```transforms.Compose``` sont appliqués à l'entrée un par un.
 
 
-- ```transforms.RandomResizedCrop(224)```: This will extract a patch of size (224, 224) from your input image randomly. So, it might pick this path from topleft, bottomright or anywhere in between. So, you are doing data augmentation in this part. Also, changing this value won't play nice with the fully-connected layers in your model, so not advised to change this.
+- ```transforms.RandomResizedCrop(224)```: Cela extraira un patch de taille (224, 224) de votre image d'entrée au hasard. Ainsi, il peut choisir ce chemin de haut en bas, en bas à droite ou n'importe où entre les deux. Donc, vous faites une augmentation des données dans cette partie. De plus, changer cette valeur ne fonctionnera pas bien avec les couches entièrement connectées de votre modèle, il n'est donc pas conseillé de changer cela.
 
-- ```transforms.RandomHorizontalFlip()```: Once we have our image of size (224, 224), we can choose to flip it. This is another part of data augmentation.
+- ```transforms.RandomHorizontalFlip()```: Une fois que nous avons notre image de taille (224, 224), nous pouvons choisir de la retourner. C'est une autre partie de l'augmentation des données.
 
-- ```transforms.ToTensor()```: This just converts your input image to PyTorch tensor.
+- ```transforms.ToTensor()```: Cela convertit simplement votre image d'entrée en tenseur PyTorch.
 
-- ```transforms.Resize(256)```: First your input image is resized to be of size (256, 256)
+- ```transforms.Resize(256)```: Tout d'abord, votre image d'entrée est redimensionnée pour être de taille (256, 256).
 
-- ```transforms.CentreCrop(224)```: Crops the center part of the image of shape (224, 224)
-
-
-- ```transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])```: This is just input data scaling and these values (mean and std) must have been precomputed for your dataset. Changing these values is also not advised.
-Dataloader is able to spit out random samples of our data, so our model won’t have to deal with the entire dataset every time. This makes training more efficient.
-We specify how many images we want at once as our batch_size (so 32 means we want to get 32 images at one time). We also want to shuffle our images so it gets inputted randomly into our AI model.
+- ```transforms.CentreCrop(224)```: Recadre la partie centrale de l'image de la forme (224, 224).
 
 
-- The ``datasets.ImageFolder()`` command expects our data to be organized in the following way: root/label/picture.png. In other words, the images should be sorted into folders. For example, all the pictures of bees should be in one folder, all the pictures of ants should be in another etc.
+- ```transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])```: Il ne s'agit que de la mise à l'échelle des données d'entrée et ces valeurs (moyenne et std) doivent avoir été précalculées pour votre ensemble de données. Il est également déconseillé de modifier ces valeurs.
+                                                                            Dataloader est capable de cracher des échantillons aléatoires de nos données, de sorte que notre modèle n'aura pas à traiter l'ensemble de données à chaque fois. Cela rend la formation plus efficace.
+                                                                            Nous spécifions le nombre d'images que nous voulons à la fois comme notre batch_size (donc 32 signifie que nous voulons obtenir 32 images à la fois). Nous voulons également mélanger nos images afin qu'elles soient entrées au hasard dans notre modèle d'IA.
 
-*The code cell below write three separate data loaders for the training, validation, and test datasets of humans images (located at covid19-face-mask-data/face-mask-dataset/train, covid19-face-mask-data/face-mask-dataset/valid, and covid19-face-mask-data/face-mask-dataset/test, respectively). You may find this [documentation on custom datasets](http://pytorch.org/docs/stable/torchvision/datasets.html) to be a useful resource. If you are interested in augmenting your training and/or validation data, check out the wide variety of [transforms](http://pytorch.org/docs/stable/torchvision/transforms.html?highlight=transform)!*
+- la ``datasets.ImageFolder()`` commande s'attend à ce que nos données soient organisées de la manière suivante: root / label / picture.png. En d'autres termes, les images doivent être triées dans des dossiers. Par exemple, toutes les images d'abeilles devraient être dans un dossier, toutes les images de fourmis devraient être dans un autre etc.
+
+*La cellule de code ci-dessous écrit trois chargeurs de données distincts pour les ensembles de données d'entraînement, de validation et de test d'images humaines(situe a covid19-face-mask-data/face-mask-dataset/train, covid19-face-mask-data/face-mask-dataset/valid, and covid19-face-mask-data/face-mask-dataset/test, respectivement). 
+Vous pouvez trouver ceci [documentation on custom datasets](http://pytorch.org/docs/stable/torchvision/datasets.html) 
+être une ressource utile. Si vous souhaitez augmenter vos données de formation et / ou de validation, découvrez la grande variété de [transforms](http://pytorch.org/docs/stable/torchvision/transforms.html?highlight=transform)!*
 
 ```
 from PIL import Image
@@ -114,14 +116,14 @@ loaders_scratch['train'] = torch.utils.data.DataLoader(datafolder_transfer['trai
 loaders_scratch['valid'] = torch.utils.data.DataLoader(datafolder_transfer['valid'], batch_size=batch_size, num_workers=num_workers, shuffle=True, drop_last=True)
 loaders_scratch['test'] = torch.utils.data.DataLoader(datafolder_transfer['test'], batch_size=batch_size, num_workers=num_workers, shuffle=True, drop_last=True)
 ```
-### Step 2: Define the Model Architecture
-Use transfer learning to create a CNN to classify the face mask . Use the code below, and save your initialized model as the variable model_transfer.
+### etape 2: Define l Architecture du model
+Utilisez l'apprentissage par transfert pour créer un CNN pour classer le masque facial. Utilisez le code ci-dessous et enregistrez votre modèle initialisé en tant que variable model_transfer.
 
-Transfer learning is a machine learning method where a model developed for a task is reused as the starting point for a model on a second task.
+L'apprentissage par transfert est une méthode d'apprentissage automatique dans laquelle un modèle développé pour une tâche est réutilisé comme point de départ d'un modèle sur une deuxième tâche.
 
-It is a popular approach in deep learning where pre-trained models are used as the starting point on computer vision and natural language processing tasks given the vast compute and time resources required to develop neural network models on these problems and from the huge jumps in skill that they provide on related problems.
+C'est une approche populaire dans l'apprentissage en profondeur où des modèles pré-entraînés sont utilisés comme point de départ pour les tâches de vision par ordinateur et de traitement du langage naturel étant donné les vastes ressources de calcul et de temps nécessaires pour développer des modèles de réseaux neuronaux sur ces problèmes et des énormes sauts de compétences. qu'ils fournissent sur des problèmes connexes.
 
-there are various [pretrain model](https://pytorch.org/docs/stable/torchvision/models.html) in pytorch : 
+Il y a plusieurs [pretrain model](https://pytorch.org/docs/stable/torchvision/models.html) en pytorch : 
 
 - resnet18 
 - alexnet 
@@ -137,16 +139,17 @@ there are various [pretrain model](https://pytorch.org/docs/stable/torchvision/m
 - mnasnet 
 
 
-We are using Vgg16 model in this tutorial.
 
-VGG16 is a convolutional neural network model proposed by K. Simonyan and A. Zisserman from the University of Oxford in the paper “Very Deep Convolutional Networks for Large-Scale Image Recognition”. The model achieves 92.7% top-5 test accuracy in ImageNet, which is a dataset of over 14 million images belonging to 1000 classes.
+Nous utilisons le modèle Vgg16 dans ce tutoriel.
+
+VGG16 est un modèle de réseau de neurones convolutif proposé par K. Simonyan et A. Zisserman de l'Université d'Oxford dans le document «Very Deep Convolutional Networks for Large-Scale Image Recognition». Le modèle atteint une précision de test de 92,7% dans le top 5 dans ImageNet, qui est un ensemble de données de plus de 14 millions d'images appartenant à 1000 classes.
 
 <img src="https://github.com/achilep/Tutoriel-Sur-Un-System-De-Reconnaissance-Du-Cache-Nez-Avec-pytorch/blob/main/Resource/readme_image/vgg16-neural-network-850x501.jpg" alt="Load the Model"/>
 
-Here is a more intuitive layout of the VGG-16 Model.
+Voici une présentation plus intuitive du modèle VGG-16.
 <img src="https://github.com/achilep/Tutoriel-Sur-Un-System-De-Reconnaissance-Du-Cache-Nez-Avec-pytorch/blob/main/Resource/readme_image/VGG-2-850x208.png" alt="Load the Model"/>
 
-The following are the layers of the model:
+Voici les couches du modèle:
 
 Convolutional Layers = 13
 Pooling Layers = 5
@@ -217,18 +220,16 @@ print(model_transfer)
 ```
 <img src="https://github.com/achilep/Tutoriel-Sur-Un-System-De-Reconnaissance-Du-Cache-Nez-Avec-pytorch/blob/main/Resource/readme_image/print-modeltrasnfert.png" alt="Load the Model"/>
 
-### Step 3: Specify Loss Function and Optimizer
-Error and Loss Function: In most learning networks, error is calculated as the difference between the actual output and the predicted output.
-The function that is used to compute this error is known as Loss Function.
+### Step 3: Specifies le  Loss Function et l Optimizer
+Fonction d'erreur et de perte: dans la plupart des réseaux d'apprentissage, l'erreur est calculée comme la différence entre la sortie réelle et la sortie prévue.
+La fonction utilisée pour calculer cette erreur est appelée fonction de perte.
 
 #### Loss function
-loss functions are mathematical algorithms that helps measure how close a neural net learns to getting the actual result. In machine learning, a loss function is a mathematical algorithm that evaluates the performance of an ML algorithm with respect to its desired result. There are various loss functions for various problems. You are aware that machine learning problem can (in basic terms) be either a classification problem or a regression problem. This implies that we do have optimized loss functions for classification and others for regression. To mention a few, we do have the following loss functions as classification based (binary cross entropy, categorical cross entropy, cosine similarity and others). We also have, mean squared error (MSE), mean absolute percentage error (MAPE), mean absolute error (MAE), just to mention a few, used for regression based problems.
-
+Les fonctions de perte sont des algorithmes mathématiques qui aident à mesurer à quel point un réseau neuronal apprend à obtenir le résultat réel. Dans l'apprentissage automatique, une fonction de perte est un algorithme mathématique qui évalue les performances d'un algorithme ML par rapport à son résultat souhaité. Il existe différentes fonctions de perte pour différents problèmes. Vous savez que le problème d'apprentissage automatique peut (en termes simples) être soit un problème de classification, soit un problème de régression. Cela implique que nous avons des fonctions de perte optimisées pour la classification et d'autres pour la régression. Pour n'en citer que quelques-uns, nous avons les fonctions de perte suivantes basées sur la classification (entropie croisée binaire, entropie croisée catégorique, similitude cosinus et autres). Nous avons également, pour n'en citer que quelques-uns, l'erreur quadratique moyenne (MSE), l'erreur en pourcentage absolue moyenne (MAPE), l'erreur absolue moyenne (MAE), pour n'en citer que quelques-uns, utilisées pour les problèmes fondés sur la régression.
 
 #### An optimizer
-In simple sentences, an optimizer can basically be referred to as an algorithm that helps another algorithm to reach its peak performance without delay. With respect to machine learning (neural network), we can say an optimizer is a mathematical algorithm that helps our loss function reach its convergence point with minimum delay (and most importantly, reduce the posibility of gradient explosion). Examples include, adam, stochastic gradient descent (SGD), adadelta, rmsprop, adamax, adagrad, nadam etc.
-
-Use the next code cell to specify a loss [function](http://pytorch.org/docs/master/nn.html#loss-functions) and [optimizer](http://pytorch.org/docs/master/optim.html). Save the chosen loss function as criterion_transfer, and the optimizer as optimizer_transfer below.
+Dans des phrases simples, un optimiseur peut essentiellement être appelé un algorithme qui aide un autre algorithme à atteindre ses performances maximales sans délai. En ce qui concerne l'apprentissage automatique (réseau de neurones), nous pouvons dire qu'un optimiseur est un algorithme mathématique qui aide notre fonction de perte à atteindre son point de convergence avec un délai minimum (et surtout, à réduire la possibilité d'explosion de gradient). Les exemples incluent, adam, descente de gradient stochastique (SGD), adadelta, rmsprop, adamax, adagrad, nadam etc.
+Utilisez la cellule de code suivante pour spécifier une perte [function](http://pytorch.org/docs/master/nn.html#loss-functions) and [optimizer](http://pytorch.org/docs/master/optim.html). Enregistrez la fonction de perte choisie sous critère_transfer et l'optimiseur sous optimizer_transfer ci-dessous.
 
 ```
 import torch.optim as optim
@@ -237,7 +238,7 @@ criterion_transfer = nn.CrossEntropyLoss()
 optimizer_transfer = optim.SGD(model_transfer.classifier.parameters(), lr=0.001)
 ```
 ### Step 4: Train and Validate the Model
-Train and validate your model in the code cell below. [Save the final model parameters](http://pytorch.org/docs/master/notes/serialization.html) at filepath ```'model_transfer.pt'```.
+Entraînez et validez votre modèle dans la cellule de code ci-dessous. [Save the final model parameters](http://pytorch.org/docs/master/notes/serialization.html) au chemin du fichier ```'model_transfer.pt'```.
 ```
 import numpy as np
 from glob import glob
@@ -318,8 +319,8 @@ print(model_transfer)
 ```
 <img src="https://github.com/achilep/Tutoriel-Sur-Un-System-De-Reconnaissance-Du-Cache-Nez-Avec-pytorch/blob/main/Resource/readme_image/after_train.png" alt="Load the Model"/>
 
-### Step 5: Test the Model
-Try out your model on the test dataset . Use the code cell below to calculate and print the test loss and accuracy. Ensure that your test accuracy is greater than 60%.
+### etape 5: Teste le Model
+Essayez votre modèle sur l'ensemble de données de test. Utilisez la cellule de code ci-dessous pour calculer et imprimer la perte et la précision du test. Assurez-vous que la précision de votre test est supérieure à 60%.
 
 ```
 def test(loaders, model, criterion, use_cuda):
@@ -359,8 +360,8 @@ test(loaders_transfer, model_transfer, criterion_transfer, use_cuda)
 ```
 <img src="https://github.com/achilep/Tutoriel-Sur-Un-System-De-Reconnaissance-Du-Cache-Nez-Avec-pytorch/blob/main/Resource/readme_image/test_accuraty.png" alt="Test Accuracy"/>
 
-### Step 6: Predict if a human is wearing a face mask or not  with the Model
-Write a function that takes an image path as input and returns the mask if the man present on the image is wearing a face mask or not base on the prediction of the model.
+### etape 6: Predire si la personne porte un cache nez ou non avec le  Model
+Ecrire une fonction qui prend un chemin d'image en entrée et renvoie le masque si l'homme présent sur l'image porte un masque facial ou non en se basant sur la prédiction du modèle.
 ```
 ###  Write a function that takes a path to an image as input
 ### and returns the prediction of the model.
@@ -393,9 +394,10 @@ def predict_transfer(img_path):
     
     return class_names[prediction]  # predicted class label
   ```
- ### Step 7: Write your Algorithm 
- Write the run_app that an image of a human an print ```This person is responsible, he wears his face mask!!!!``` when a that person is wearing a face 
- and print ``` This person is irresponsible, he does not wear his face mask!!!!!``` when a that does not have a face mask.
+ ### etape 7: ecrire ton Algorithm 
+ 
+Écrivez le run_app qu'une image d'un humain une impression ```This person is responsible, he wears his face mask!!!!``` quand une cette personne porte un visage 
+ et ecrit ``` This person is irresponsible, he does not wear his face mask!!!!!``` quand un qui n'a pas de masque facial.
  
 
 ```$xslt
@@ -413,8 +415,8 @@ def run_app(img_path):
     plt.imshow(img)
     plt.show()
 ```
-### Step 8: test our function run_app 
-We can now use how test dataset to test our system.
+### etape 8: teste ta  fonction run_app 
+Nous pouvons maintenant utiliser le test donne pour tester l'ensemble de données pour tester notre système.
 
 ```$xslt
 ## Execute your algorithm from Step 6 on
@@ -428,9 +430,9 @@ for file in np.array(glob("../input/covid19-face-mask-recognition-test-data/Covi
 <img src="https://github.com/achilep/Tutoriel-Sur-Un-System-De-Reconnaissance-Du-Cache-Nez-Avec-pytorch/blob/main/Resource/readme_image/test result1.png" alt="result of the predition"/>
 <img src="https://github.com/achilep/Tutoriel-Sur-Un-System-De-Reconnaissance-Du-Cache-Nez-Avec-pytorch/blob/main/Resource/readme_image/test result1.png" alt="result of the predition"/>
 
-### Step 9: optional integrate opencv to the project
-Write the run_app_with_opencv method that an image of a human an print ```This person is responsible, he wears his face mask!!!!``` when a that person is wearing a face 
- and print ``` This person is irresponsible, he does not wear his face mask!!!!!``` when a that does not have a face mask. and in addition located the highlight the face of a person .
+### etape 10: integre opencv a notre project
+Écrivez la méthode run_app_with_opencv qu'une image d'un humain est imprimée ```This person is responsible, he wears his face mask!!!!``` quand une cette personne porte un visage
+et imprimer ``` This person is irresponsible, he does not wear his face mask!!!!!``` quand un qui n'a pas de masque facial. et en plus localisé le point culminant du visage d'une personne.
  ```
 import matplotlib.pyplot as plt 
 import cv2                                       
@@ -464,8 +466,8 @@ def run_app_with_opencv(img_path):
     plt.imshow(cv_rgb)
     plt.show()
  ```
- ### Step 10: Test Your Algorithm
- you can use one image to test ```run_app_with_opencv```
+ ### etape 10: Teste ton Algorithm
+ vous pouvez utiliser une image pour tester ```run_app_with_opencv```
  ```
 ## Execute your algorithm from Step 6 
 ## on 1 images on your computer.
@@ -475,12 +477,12 @@ for file in np.array(glob("../input/covid19-face-mask-recognition-test-data/Covi
   ```
 <img src="https://github.com/achilep/Tutoriel-Sur-Un-System-De-Reconnaissance-Du-Cache-Nez-Avec-pytorch/blob/main/Resource/readme_image/test result with opencv.png" alt="result of the predition"/>
 
-## summary 
-we have learn how to use pre- train model to speed up the training of our model. 
+## conclusion
+nous avons appris à utiliser le modèle pré-train pour accélérer la formation de notre modèle. 
 
 ## future work 
-the project can be use in the public service to control people that are entry, the make sure that they have they face mask.
-1. we can integrate our model with a webcam or video camera using opencv.
-2. we can integrate a notification system .
-2. we can integrate our model in automation door open, in such a way that the door will open only when a person is wearing a face mask .
-3. we can use it in school to make sure that the student allway wear they face mask. 
+le projet peut être utilisé dans la fonction publique pour contrôler les personnes qui entrent, s'assurer qu'elles ont un masque facial.
+1. nous pouvons intégrer notre modèle avec une webcam ou une caméra vidéo en utilisant opencv.
+2. nous pouvons intégrer un système de notification.
+2. nous pouvons intégrer notre modèle dans l'automatisation de porte ouverte, de telle manière que la porte ne s'ouvre que lorsqu'une personne porte un masque facial.
+3. nous pouvons l'utiliser à l'école pour nous assurer que l'élève porte toujours son masque facial. 
