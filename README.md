@@ -427,8 +427,8 @@ for file in np.array(glob("../input/covid19-face-mask-recognition-test-data/Covi
     run_app(file)
 ```
 <img src="https://github.com/achilep/Tutoriel-Sur-Un-System-De-Reconnaissance-Du-Cache-Nez-Avec-pytorch/blob/main/Resource/readme_image/test result1.png" alt="result of the predition"/>
-<img src="https://github.com/achilep/Tutoriel-Sur-Un-System-De-Reconnaissance-Du-Cache-Nez-Avec-pytorch/blob/main/Resource/readme_image/test result1.png" alt="result of the predition"/>
-<img src="https://github.com/achilep/Tutoriel-Sur-Un-System-De-Reconnaissance-Du-Cache-Nez-Avec-pytorch/blob/main/Resource/readme_image/test result1.png" alt="result of the predition"/>
+<img src="https://github.com/achilep/Tutoriel-Sur-Un-System-De-Reconnaissance-Du-Cache-Nez-Avec-pytorch/blob/main/Resource/readme_image/test result2.png" alt="result of the predition"/>
+<img src="https://github.com/achilep/Tutoriel-Sur-Un-System-De-Reconnaissance-Du-Cache-Nez-Avec-pytorch/blob/main/Resource/readme_image/test result3.png" alt="result of the predition"/>
 
 ### etape 10: integre opencv a notre project
 Écrivez la méthode run_app_with_opencv qu'une image d'un humain est imprimée ```This person is responsible, he wears his face mask!!!!``` quand une cette personne porte un visage
