@@ -29,7 +29,7 @@ The models subpackage contains definitions of models for addressing different ta
 - une bonne maitrise du langage python.
 - avoir les base sur l apprentisage profond  (neural network, convolutional neural network(CNN), etc. ) 
 
-### insatlle l environement de travail  :
+### Insatller l environement de travail  :
 - Ordinateur local: vous pouvez suivre les instruction [ci](https://pytorch.org/get-started/locally/) pour pouvoir utilise pytorch dans votre ordinateur. 
 
 - plateforme en tant que service: Kaggle Kernels est une plateforme gratuite permettant d'exécuter des notebooks Jupyter dans le navigateur. kaggle offre le  GPU gratuitement pour pouvoir facilement entraine le model.
@@ -37,11 +37,11 @@ vous pouvez vous enregistrez sur kaggle  [ici](https://www.kaggle.com/)
 
 ## Construire l application etape par etape  
 
-### etape 0: Importe les daonne
+### Etape 0: Importe les daonne
 Assurez-vous d'avoir téléchargé l'ensemble de données requis.
 
 telechargez les [donne](https://www.kaggle.com/achilep/covid19-face-mask-data/download), pour tester nous allons utilise cet donne [ci](https://www.kaggle.com/achilep/covid19-face-mask-recognition-test-data).
-### Step 1: Specify Data Loaders for the covid19-face-mask-data dataset
+### Etape 1: Specify Data Loaders for the covid19-face-mask-data dataset
  
 - ```transforms.Compose``` clubs juste toutes les transformations qui lui sont apportées. 
 Donc, toutes les transformations dans le ```transforms.Compose``` sont appliqués à l'entrée un par un.
@@ -116,7 +116,7 @@ loaders_scratch['train'] = torch.utils.data.DataLoader(datafolder_transfer['trai
 loaders_scratch['valid'] = torch.utils.data.DataLoader(datafolder_transfer['valid'], batch_size=batch_size, num_workers=num_workers, shuffle=True, drop_last=True)
 loaders_scratch['test'] = torch.utils.data.DataLoader(datafolder_transfer['test'], batch_size=batch_size, num_workers=num_workers, shuffle=True, drop_last=True)
 ```
-### etape 2: Define l Architecture du model
+### Etape 2: Define l Architecture du model
 Utilisez l'apprentissage par transfert pour créer un CNN pour classer le masque facial. Utilisez le code ci-dessous et enregistrez votre modèle initialisé en tant que variable model_transfer.
 
 L'apprentissage par transfert est une méthode d'apprentissage automatique dans laquelle un modèle développé pour une tâche est réutilisé comme point de départ d'un modèle sur une deuxième tâche.
@@ -220,7 +220,7 @@ print(model_transfer)
 ```
 <img src="https://github.com/achilep/Tutoriel-Sur-Un-System-De-Reconnaissance-Du-Cache-Nez-Avec-pytorch/blob/main/Resource/readme_image/print-modeltrasnfert.png" alt="Load the Model"/>
 
-### Step 3: Specifies le  Loss Function et l Optimizer
+### Etape 3: Specifies le  Loss Function et l Optimizer
 Fonction d'erreur et de perte: dans la plupart des réseaux d'apprentissage, l'erreur est calculée comme la différence entre la sortie réelle et la sortie prévue.
 La fonction utilisée pour calculer cette erreur est appelée fonction de perte.
 
@@ -237,7 +237,7 @@ criterion_transfer = nn.CrossEntropyLoss()
 
 optimizer_transfer = optim.SGD(model_transfer.classifier.parameters(), lr=0.001)
 ```
-### Step 4: Train and Validate the Model
+### Etape 4: Train and Validate the Model
 Entraînez et validez votre modèle dans la cellule de code ci-dessous. [Save the final model parameters](http://pytorch.org/docs/master/notes/serialization.html) au chemin du fichier ```'model_transfer.pt'```.
 ```
 import numpy as np
@@ -319,7 +319,7 @@ print(model_transfer)
 ```
 <img src="https://github.com/achilep/Tutoriel-Sur-Un-System-De-Reconnaissance-Du-Cache-Nez-Avec-pytorch/blob/main/Resource/readme_image/after_train.png" alt="Load the Model"/>
 
-### etape 5: Teste le Model
+### Etape 5: Teste le Model
 Essayez votre modèle sur l'ensemble de données de test. Utilisez la cellule de code ci-dessous pour calculer et imprimer la perte et la précision du test. Assurez-vous que la précision de votre test est supérieure à 60%.
 
 ```
@@ -360,7 +360,7 @@ test(loaders_transfer, model_transfer, criterion_transfer, use_cuda)
 ```
 <img src="https://github.com/achilep/Tutoriel-Sur-Un-System-De-Reconnaissance-Du-Cache-Nez-Avec-pytorch/blob/main/Resource/readme_image/test_accuraty.png" alt="Test Accuracy"/>
 
-### etape 6: Predire si la personne porte un cache nez ou non avec le  Model
+### Etape 6: Predire si la personne porte un cache nez ou non avec le  Model
 Ecrire une fonction qui prend un chemin d'image en entrée et renvoie le masque si l'homme présent sur l'image porte un masque facial ou non en se basant sur la prédiction du modèle.
 ```
 ###  Write a function that takes a path to an image as input
@@ -394,7 +394,7 @@ def predict_transfer(img_path):
     
     return class_names[prediction]  # predicted class label
   ```
- ### etape 7: ecrire ton Algorithm 
+ ### Etape 7: ecrire ton Algorithm 
  
 Écrivez le run_app qu'une image d'un humain une impression ```This person is responsible, he wears his face mask!!!!``` quand une cette personne porte un visage 
  et ecrit ``` This person is irresponsible, he does not wear his face mask!!!!!``` quand un qui n'a pas de masque facial.
@@ -415,7 +415,7 @@ def run_app(img_path):
     plt.imshow(img)
     plt.show()
 ```
-### etape 8: teste ta  fonction run_app 
+### Etape 8: teste ta  fonction run_app 
 Nous pouvons maintenant utiliser le test donne pour tester l'ensemble de données pour tester notre système.
 
 ```$xslt
@@ -430,7 +430,7 @@ for file in np.array(glob("../input/covid19-face-mask-recognition-test-data/Covi
 <img src="https://github.com/achilep/Tutoriel-Sur-Un-System-De-Reconnaissance-Du-Cache-Nez-Avec-pytorch/blob/main/Resource/readme_image/test result2.png" alt="result of the predition"/>
 <img src="https://github.com/achilep/Tutoriel-Sur-Un-System-De-Reconnaissance-Du-Cache-Nez-Avec-pytorch/blob/main/Resource/readme_image/test result3.png" alt="result of the predition"/>
 
-### etape 10: integre opencv a notre project
+### Etape 9: integre opencv a notre project
 Écrivez la méthode run_app_with_opencv qu'une image d'un humain est imprimée ```This person is responsible, he wears his face mask!!!!``` quand une cette personne porte un visage
 et imprimer ``` This person is irresponsible, he does not wear his face mask!!!!!``` quand un qui n'a pas de masque facial. et en plus localisé le point culminant du visage d'une personne.
  ```
@@ -466,7 +466,7 @@ def run_app_with_opencv(img_path):
     plt.imshow(cv_rgb)
     plt.show()
  ```
- ### etape 10: Teste ton Algorithm
+ ### Etape 10: Teste ton Algorithm
  vous pouvez utiliser une image pour tester ```run_app_with_opencv```
  ```
 ## Execute your algorithm from Step 6 
@@ -480,7 +480,7 @@ for file in np.array(glob("../input/covid19-face-mask-recognition-test-data/Covi
 ## conclusion
 nous avons appris à utiliser le modèle pré-train pour accélérer la formation de notre modèle. 
 
-## future work 
+## future travail 
 le projet peut être utilisé dans la fonction publique pour contrôler les personnes qui entrent, s'assurer qu'elles ont un masque facial.
 1. nous pouvons intégrer notre modèle avec une webcam ou une caméra vidéo en utilisant opencv.
 2. nous pouvons intégrer un système de notification.
