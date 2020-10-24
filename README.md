@@ -437,3 +437,7 @@ le projet peut être utilisé dans la fonction publique pour contrôler les pers
 2. nous pouvons intégrer un système de notification.
 2. nous pouvons intégrer notre modèle dans l'automatisation de porte ouverte, de telle manière que la porte ne s'ouvre que lorsqu'une personne porte un masque facial.
 3. nous pouvons l'utiliser à l'école pour nous assurer que l'élève porte toujours son masque facial. 
+
+## Resources 
+Le code peut être trouvé [ici](https://github.com/achilep/Face-Mask-Recognition-System-Tutorial-With-Pytorch/blob/main/face-mask-detection.ipynb)
+La version Anglaise du tutoriel peut être trouvée [ici](https://github.com/achilep/Face-Mask-Recognition-System-Tutorial-With-Pytorch) 
