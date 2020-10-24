@@ -429,15 +429,29 @@ for file in np.array(glob("../input/covid19-face-mask-recognition-test-data/Covi
 <img src="https://github.com/achilep/Tutoriel-Sur-Un-System-De-Reconnaissance-Du-Cache-Nez-Avec-pytorch/blob/main/Resource/readme_image/test result with opencv.png" alt="result of the predition"/>
 
 ## conclusion
-nous avons appris à utiliser le modèle pré-train pour accélérer la formation de notre modèle. 
 
-## future travail 
-le projet peut être utilisé dans la fonction publique pour contrôler les personnes qui entrent, s'assurer qu'elles ont un masque facial.
-1. nous pouvons intégrer notre modèle avec une webcam ou une caméra vidéo en utilisant opencv.
-2. nous pouvons intégrer un système de notification.
-2. nous pouvons intégrer notre modèle dans l'automatisation de porte ouverte, de telle manière que la porte ne s'ouvre que lorsqu'une personne porte un masque facial.
-3. nous pouvons l'utiliser à l'école pour nous assurer que l'élève porte toujours son masque facial. 
+Nous avons appris à utiliser un modèle deja forme pour accélérer la formation de notre modèle et obtenir une  précision au-dessus de 80%. 
 
+## Travail suivant 
+
+La prochaine étape sera :
+- d'intégrer le modèle avec des caméras de surveillance pour pouvoir identifier en temps réel si un homme porte son cache nez ou non.
+
+- Intégration de systèmes d'alarme et de notification pour pouvoir avertir les agents de sécurité lorsque le système identifie un homme qui ne porte pas son cache nez. 
 ## Resources 
+ 
+Le blog officiel de  [Pytorch](https://pytorch.org/blog/)
+ 
+La documentation  officiel [Pytorch](https://pytorch.org/docs/stable/index.html)
+ 
+Le github repository  officiel [Pytorch](https://github.com/pytorch) 
+ 
+Le Tutoriel officiel de [Pytorch](https://pytorch.org/tutorials/)
+ 
+le blog officiel de [pytorch](https://pytorch.org/blog/)
+ 
 Le code peut être trouvé [ici](https://github.com/achilep/Tutoriel-Sur-Un-System-De-Reconnaissance-Du-Cache-Nez-Avec-pytorch/blob/main/systeme-de-reconnaissance-du-cache-nez.ipynb)
+
 La version Anglaise du tutoriel peut être trouvée [ici](https://github.com/achilep/Face-Mask-Recognition-System-Tutorial-With-Pytorch) 
+
+###### Merci pour votre attention!!!
