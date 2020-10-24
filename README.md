@@ -6,7 +6,7 @@ resultat final
 
 <img src="https://github.com/achilep/Tutoriel-Sur-Un-System-De-Reconnaissance-Du-Cache-Nez-Avec-pytorch/blob/main/Resource/readme_image/test%20result1.png" alt="output"/>
 
-### Notion couvert par ce tutoriel 
+### Notion  appréhendé dans ce tutoriel 
 
 1. [transform](https://pytorch.org/docs/stable/torchvision/transforms.html?highlight=transform)
 La transformation des données est le processus dans lequel vous extrayez les données de leur état source brut, cloisonné et normalisé et les transformez en données jointes, modélisées dimensionnellement, dénormalisées et prêtes pour l'analyse.
@@ -25,15 +25,15 @@ torch.optim est un package implémentant divers algorithmes d'optimisation.
 
       
 ### prerequis
-- Un ordinateur avec GPU
+- Un ordinateur avec GPU.
 - Une bonne maitrise du langage python.
-- Avoir les base sur l apprentisage profond  (neural network, convolutional neural network(CNN), etc. ) 
+- Avoir les base sur l apprentisage profond  (neural network, convolutional neural network(CNN), etc. ).
 
-### Insatller l environement de travail  :
+### Installation de l environement de travail  
 - Ordinateur local: vous pouvez suivre les instruction [ci](https://pytorch.org/get-started/locally/) pour pouvoir utilise pytorch dans votre ordinateur. 
 
 - plateforme en tant que service: Kaggle Kernels est une plateforme gratuite permettant d'exécuter des notebooks Jupyter dans le navigateur. kaggle offre le  GPU gratuitement pour pouvoir facilement entraine le model.
-vous pouvez vous enregistrez sur kaggle  [ici](https://www.kaggle.com/)
+vous pouvez vous enregistrez sur kaggle  [ici](https://www.kaggle.com/).
 
 ## Construction de l intelligence artificiel etape par etape  
 
@@ -109,14 +109,14 @@ num_workers = 0
 loaders_transfer = {x: torch.utils.data.DataLoader(datafolder_transfer[x], batch_size=batch_size, num_workers=num_workers, shuffle=True, drop_last=True) 
 for x in ['train', 'valid', 'test']}
 ```
-### Etape2 Define l Architecture du model
+### Etape2 Apprentissage par transfert avec le model VGG16 et Definition de l Architecture du model
 Dans cette section, vous apprendrez à utiliser des réseaux pré-formés pour résoudre des problèmes complexes de vision par ordinateur. Plus précisément, vous utiliserez les réseaux formés ImageNet [disponibles auprès de torchvision](http://pytorch.org/docs/0.3.0/torchvision/models.html).
 
 
 ImageNet est un vaste ensemble de données avec plus d'un million d'images étiquetées dans 1000 catégories. Il est utilisé pour entraîner des réseaux de neurones profonds à l'aide d'une architecture appelée couches convolutives. Je n'entrerai pas dans les détails des réseaux convolutifs ici, mais si vous voulez en savoir plus sur eux,s'il te plait regarde [ça](https://www.youtube.com/watch?v=2-Ol7ZB0MmU).
 
 
-Une fois formés, ces modèles fonctionnent à merveille et comportent des détecteurs d'images sur lesquelles ils n'ont pas été formés. L'utilisation d'un réseau pré-formé sur des images, et non dans l'ensemble d'apprentissage, est appelée apprentissage par transfert. Ici, nous utiliserons l'apprentissage par transfert pour former un réseau capable de classer notre visage avec un masque et des photos de visage sans masque avec une précision presque parfaite.
+Une fois formés, ces modèles fonctionnent à merveille et comportent des détecteurs d'images sur lesquelles ils n'ont pas été formés. L'utilisation d'un réseau pré-formé sur des images, et non dans l'ensemble d'apprentissage, est appelée apprentissage par transfert. Ici, nous utiliserons l'apprentissage par transfert pour former un réseau capable de classer notre visage avec un cache nez et des photos de visage sans cache nez avec une précision presque parfaite.
 
 
 Avec torchvision.models, vous pouvez télécharger ces réseaux pré-formés et les utiliser dans vos applications. Nous allons maintenant inclure des modèles dans nos importations.
@@ -126,14 +126,12 @@ from torchvision import datasets, transforms, models
 La plupart des modèles pré-entraînés nécessitent que l'entrée soit des images 224x224. De plus, nous devrons faire correspondre la normalisation utilisée lorsque les modèles ont été entraînés. Chaque canal de couleur a été normalisé séparément, les moyennes sont [0,485, 0,456, 0,406] et les écarts types sont [0,229, 0,224, 0,225].
 
 
-Apprentissage par transfert
-
 La plupart du temps, vous ne voudrez pas former vous-même un réseau convolutif complet. La formation moderne des ConvNets sur d'énormes ensembles de données comme ImageNet prend des semaines sur plusieurs GPU.
  
 Au lieu de cela, la plupart des gens utilisent un réseau pré-formé soit comme extracteur de fonctionnalités fixes, soit comme réseau initial à affiner.
 
 
-Dans ce cahier, vous utiliserez VGGNet formé sur l'ensemble de données ImageNet en tant qu'extracteur d'entité. Vous trouverez ci-dessous un schéma de l'architecture VGGNet, avec une série de couches convolutives et une mise en commun maximale, puis trois couches entièrement connectées à la fin qui classent les 1000 classes trouvées dans la base de données ImageNet.
+Dans cette section, vous utiliserez VGGNet formé sur l'ensemble de données ImageNet en tant qu'extracteur d'entité. Vous trouverez ci-dessous un schéma de l'architecture VGGNet, avec une série de couches convolutives et une mise en commun maximale, puis trois couches entièrement connectées à la fin qui classent les 1000 classes trouvées dans la base de données ImageNet.
 
 <img src="https://github.com/achilep/Tutoriel-Sur-Un-System-De-Reconnaissance-Du-Cache-Nez-Avec-pytorch/blob/main/Resource/readme_image/vgg_16_architecture.png" alt="Load the Model"/>
  
