@@ -439,5 +439,5 @@ le projet peut être utilisé dans la fonction publique pour contrôler les pers
 3. nous pouvons l'utiliser à l'école pour nous assurer que l'élève porte toujours son masque facial. 
 
 ## Resources 
-Le code peut être trouvé [ici](https://github.com/achilep/Face-Mask-Recognition-System-Tutorial-With-Pytorch/blob/main/face-mask-detection.ipynb)
+Le code peut être trouvé [ici](https://github.com/achilep/Tutoriel-Sur-Un-System-De-Reconnaissance-Du-Cache-Nez-Avec-pytorch/blob/main/systeme-de-reconnaissance-du-cache-nez.ipynb)
 La version Anglaise du tutoriel peut être trouvée [ici](https://github.com/achilep/Face-Mask-Recognition-System-Tutorial-With-Pytorch) 
