@@ -186,7 +186,7 @@ criterion_transfer = nn.CrossEntropyLoss()
 
 optimizer_transfer = optim.SGD(model_transfer.classifier.parameters(), lr=0.001)
 ```
-### Etape4 Train and Validate the Model
+### Etape4 Former et valider le modèle
 Entraînez et validez votre modèle dans la cellule de code ci-dessous. [Enregistrer les paramètres finaux du modèle](http://pytorch.org/docs/master/notes/serialization.html) au chemin du fichier ```'model_transfer.pt'```.
 ```
 import numpy as np
