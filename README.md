@@ -40,7 +40,7 @@ vous pouvez vous enregistrez sur kaggle  [ici](https://www.kaggle.com/).
 ### Etape0 acquisition des donnees nécessaire à l'apprentissage du model
 Assurez-vous d'avoir téléchargé l'ensemble de données requis.
 
-Telechargez les donnees nécessaire à l'apprentissage du model [ici]((https://www.kaggle.com/achilep/covid19-face-mask-data/download)) , pour tester nous allons utilise cet donne [ci](https://www.kaggle.com/achilep/covid19-face-mask-recognition-test-data).
+Telechargez les donnees nécessaire à l'apprentissage du model [ici](https://www.kaggle.com/achilep/covid19-face-mask-data/download) , pour tester nous allons utilise cet donne [ci](https://www.kaggle.com/achilep/covid19-face-mask-recognition-test-data).
 ### Etape1 Spécifier les chargeurs de données pour l'ensemble de données covid19-face-mask-data 
  
 - ```transforms.Compose``` clubs juste toutes les transformations qui lui sont apportées. 
