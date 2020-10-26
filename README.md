@@ -268,7 +268,7 @@ print(model_transfer)
 ```
 <img src="https://github.com/achilep/Tutoriel-Sur-Un-System-De-Reconnaissance-Du-Cache-Nez-Avec-pytorch/blob/main/Resource/readme_image/after_train.png" alt="Load the Model"/>
 
-### Etape5 Teste le Model
+### Etape5 Testez le Model
 Essayez votre modèle sur l'ensemble de données de test. Utilisez la cellule de code ci-dessous pour calculer et imprimer la perte et la précision du test. Assurez-vous que la précision de votre test est supérieure à 60%.
 
 ```
